@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <div id="maincontainer"></div>
+        <script>
+            let headder = document.createElement("h1");
+            headder.textContent = "Exercise 04: JavaScript&DOM";
+            maincontainer.appendChild(headder)
+
+            const headerContainer = document.createElement("div");
+            headerContainer.classList.add('header-container')
+            headerContainer.innerHTML = "<h2>ExerptOM</h2>";
+            headerContainer.style.height = '80px'
+            headerContainer.style.position = "relative"
+            maincontainer.appendChild(headerContainer);
+
+            let div1 = document.createElement("div");
+            div1.style.margin = "30px 0px 30px 0px";
+
+            let butt = document.createElement("button");
+            butt.textContent = "Click me to display Date and Time";
+            div1.appendChild(butt)
+            maincontainer.appendChild(div1)
+
+            let div2 = document.createElement("div");
+            div2.style.margin = "30px 0px 30px 0px";
+
+            let personal = document.createElement("a");
+            personal.textContent = "Personal Info";
+            personal.style.color = 'violet';
+            personal.href = "#";
+            div2.appendChild(personal);
+            maincontainer.appendChild(div2);
+
+
+            personal.onmouseover = () => {
+                personal.style.background = 'yellow';
+                personal.style.color = 'blue';
+            }
+            personal.onmouseout = () => {
+                personal.style.background = 'none';
+                personal.style.color = 'violet';
+            }
+            
+            let personal_link = document.createElement('ul');
+                personal_link.hidden = true;
+            
+            personal.onclick = () => {
+                personal_link.hidden = !personal_link.hidden;
+            }
+
+            let personalName = document.createElement('li')
+                personalName.textContent = "Name: Phasin muangmaiprae, ID: 65010710";
+                personal_link.appendChild(personalName);
+
+            let personalSub = document.createElement('li')
+                personalSub.textContent = "Subject: Web Application Development";
+                personal_link.appendChild(personalSub);
+
+            let personalSem = document.createElement('li')
+                personalSem.textContent = "Semester: 2/2565";
+                personal_link.appendChild(personalSem);
+
+            div2.appendChild(personal_link);
+
+            let snapshot = document.createElement("h1");
+                snapshot.textContent = "Snapshots";
+                snapshot.style.fontSize = "40px";
+                maincontainer.appendChild(snapshot)
+
+
+            let piclink = document.createElement("ul");
+
+                let Firework = document.createElement("li");
+
+                    let Firework_link = document.createElement("a");
+                        Firework_link.textContent = "Firework";
+                        Firework_link.href = "#";
+                        Firework.appendChild(Firework_link)
+                
+                    piclink.appendChild(Firework)
+
+                let crest = document.createElement("li");
+
+                    let crest_link = document.createElement("a");
+                        crest_link.textContent = "Crest";
+                        crest_link.href = "#";
+                        crest.appendChild(crest_link)
+
+                    piclink.appendChild(crest)
+
+                let Action = document.createElement("li");
+
+                    let Action_link = document.createElement("a");
+                        Action_link.textContent = "Action";
+                        Action_link.href = "#";
+                        Action.appendChild(Action_link)
+
+                    piclink.appendChild(Action)
+
+                let buffalo = document.createElement("li");
+
+                    let buffalo_link = document.createElement("a");
+                        buffalo_link.textContent = "Buffalo";
+                        buffalo_link.href = "#";
+                        buffalo.appendChild(buffalo_link)
+
+                    piclink.appendChild(buffalo)
+
+            maincontainer.appendChild(piclink)
+
+            let img = document.createElement("img");
+            img.style.width = "40%";
+            img.src = 'https://www.ce.kmitl.ac.th/api/main/banner/download/1';
+            maincontainer.appendChild(img)
+
+            Firework.onclick = () => {
+                img.src = 'https://img.freepik.com/free-vector/pyrotechnics-fireworks-city-background-with-city-sky_1284-54177.jpg?w=1380&t=st=1707658746~exp=1707659346~hmac=bb9a2c84a6c1c46520a84bb85b12e2114f971be79c35189c21300bcfd440fd8a';
+            }
+
+            crest.onclick = () => {
+                img.src = 'https://img.freepik.com/free-vector/premium-quality-product-golden-label-design_1017-12393.jpg?size=626&ext=jpg&ga=GA1.2.1246771699.1707658742&semt=ais';
+            }
+
+            Action.onclick = () => {
+                img.src = 'https://actionbaseballclub.org/wp-content/uploads/2021/09/213058607_794876961219443_5982193436072557725_n.jpg';
+            }
+
+            buffalo.onclick = () => {
+                img.src = 'https://compote.slate.com/images/209ef3b5-7d52-432f-9b0f-b5b7208653aa.jpg?width=1560';
+            }
+
+            let toggle = false;
+            let worklawe = null;
+            
+            let Workerfuc = () => {
+                let workhard = new Worker("worker.js");
+                workhard.onmessage = (message) => {
+                    butt.textContent = message.data;
+                    buttcolor();
+                }
+                return workhard
+            }
+
+            butt.addEventListener("click", () => {
+                console.log("hi")
+                if (toggle == false){
+                    div2.style.margin = "81px 0px 30px 0px";
+                    butt.style.cssText = "position: fixed; top : 0px; right: 0;";
+                    worklawe = Workerfuc("1");
+                    worklawe.postMessage("1");
+                }
+                else{
+                    worklawe.terminate();
+                    div2.style.margin = "30px 0px 30px 0px";
+                    butt.style.position = "";
+                }
+                toggle = !toggle
+            }
+            )
+
+            let butt_bgcolor = ['white', 'cyan', 'green', 'yellow', 'red', 'black'];
+            let butt_textcolor = ['black', 'red', 'yellow', 'green', 'cyan', 'white'];
+            let index = 0;
+
+            let buttcolor = () => {
+                butt.style.backgroundColor = butt_bgcolor[index];
+                butt.style.color = butt_textcolor[index];
+                index += 1;
+                index %= 6;
+            }
+
+        </script>
+    </body>
+</html>
